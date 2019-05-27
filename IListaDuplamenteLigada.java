@@ -9,9 +9,9 @@
 public interface IListaDuplamenteLigada{
     public boolean estaVazia();
     
-    public void inserirInicio(Object novo);
+    public void inserirInicio(Object elem);
 
-    public void inserirFim(Object novo);
+    public void inserirFim(Object elem);
     
     public boolean inserirApos(int chave, Object novo);
 

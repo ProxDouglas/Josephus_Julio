@@ -302,13 +302,15 @@ class ListaDuplamenteLigada implements IListaDuplamenteLigada {
     /**
      * Retorna o conteudo da Lista como String (do inicio ate o fim)
      */
-    public String toString() {
+   public String toString() {
         String s = "[ ";
         Celula noAtual = getInicio();  // inicia do inicio
-        while(noAtual != null) {    // enquanto nao for fim da lista,
+        while(noAtual != getFim()) {    // enquanto nao for fim da lista,
             s = s + noAtual.toString() + " ";  // monta os dados como string
             noAtual = noAtual.getProximo();   // vai para o proximo
         }
+        //noAtual = noAtual.getProximo();   // vai para o proximo
+        s = s + noAtual.toString() + " ";  // monta os dados como string
         s = s + "]";
 
         return s;
@@ -321,11 +323,11 @@ class ListaDuplamenteLigada implements IListaDuplamenteLigada {
         String s = "[ ";
         Celula noAtual = getFim();  // inicia no fim
 
-        while(noAtual != null) { // enquanto nao for inicio da lista,
+        while(noAtual != getInicio()) { // enquanto nao for inicio da lista,
             s = s + noAtual.toString() + " "; // monta os dados como string
             noAtual = noAtual.getAnterior(); // vai para o anterior
         }
-        
+        s = s + noAtual.toString() + " ";
         s = s + "]";
         
         return s;

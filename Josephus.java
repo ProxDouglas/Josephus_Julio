@@ -20,7 +20,7 @@ public class Josephus
     public int getIntervalo(){
         return this.intervalo;
     }
-    
+     
     public void setIntervalo(int intervalo){
         this.intervalo = intervalo;
     }
@@ -35,12 +35,12 @@ public class Josephus
     
     public void inserir(int quantidade){
         int i;
+        Object novo;
         for(i=0; i<quantidade; i++){
-            Object novo;
             novo = i+1;
-            ldl.inserirInicio(i);
+            ldl.inserirInicio(novo);
         }
-        //setPonteiro(ldl.getInicio);
+        //setPonteiro(ldl.getInicio());
     }
     
     public void eliminarPorEtapa(int intervalo){
@@ -49,9 +49,13 @@ public class Josephus
     
     
     public void eliminarSemEtapas(int intervalo){
-        while(getPonteiro() != null){
+        do{
             eliminarPorEtapa(intervalo);
-        }
+        }while(getPonteiro() != null);
+    }
+    
+    public String exibirLista(){
+        return ldl.toStrinDoFim();
     }
     
 }
