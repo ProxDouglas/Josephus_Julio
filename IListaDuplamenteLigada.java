@@ -21,7 +21,7 @@ public interface IListaDuplamenteLigada{
     
     public Object removerPelaChave(int chave);
     
-    public Object removerEmIntervalos(Celula assassino, int intervalo);
+    public Object removerEmIntervalos(Object endereco, int intervalo);
     
     public String toString();
     

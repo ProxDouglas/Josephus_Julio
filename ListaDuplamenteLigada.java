@@ -264,21 +264,21 @@ class ListaDuplamenteLigada implements IListaDuplamenteLigada {
         return temp;
     }
     
-    public Celula removerEmIntervalos(Celula assassino, int intervalo){
+    public Celula removerEmIntervalos(Object endereco, int intervalo){
         Celula eliminada;
-        Celula anteriorEli;
+        Celula assassino;
         int i;
-        if(assassino == null){
-            assassino = getInicio();
+        if(endereco == null){
+            endereco = getInicio();
         }
-        eliminada = assassino;    
+        eliminada = (Celula)endereco;    
         for(i=0; i<intervalo; i++){
             eliminada = eliminada.getProximo();
         }
+        //assassino = eliminada.getProximo();
         assassino = eliminada.getProximo();
-        anteriorEli = eliminada.getAnterior();
+        (eliminada.getAnterior()).setProximo(assassino);
         assassino.setAnterior(eliminada.getAnterior());
-        anteriorEli.setProximo(eliminada.getProximo());
         eliminada.setAnterior(null);
         eliminada.setProximo(null);
         
