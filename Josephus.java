@@ -25,7 +25,7 @@ public class Josephus
         this.intervalo = intervalo;
     }
     
-    public Celula setPonteiro(){
+    public Celula getPonteiro(){
         return this.ponteiro;
     }
     
@@ -43,9 +43,15 @@ public class Josephus
         //setPonteiro(ldl.getInicio);
     }
     
-    public void removerEspecifico(){
-        
+    public void eliminarPorEtapa(int intervalo){
+        ponteiro = (Celula)ldl.removerEmIntervalos(getPonteiro(), intervalo);
     }
     
+    
+    public void eliminarSemEtapas(int intervalo){
+        while(getPonteiro() != null){
+            eliminarPorEtapa(intervalo);
+        }
+    }
     
 }

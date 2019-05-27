@@ -264,23 +264,37 @@ class ListaDuplamenteLigada implements IListaDuplamenteLigada {
         return temp;
     }
     
+    /**
+     * Remove em intervalos pré-definidos
+     * 
+     * endereço e a ultima celula a eliminar outra e intervalo.
+     * 
+     * @return Celula que eliminou outra
+     * 
+     */
+    
     public Celula removerEmIntervalos(Object endereco, int intervalo){
         Celula eliminada;
         Celula assassino;
         int i;
-        if(endereco == null){
-            endereco = getInicio();
+        if(getTamanho() > 1){
+            if(endereco == null){
+                endereco = getInicio();
+            }
+            eliminada = (Celula)endereco;    
+            for(i=0; i<intervalo; i++){
+                eliminada = eliminada.getProximo();
+            }
+            //assassino = eliminada.getProximo();
+            assassino = eliminada.getProximo();
+            (eliminada.getAnterior()).setProximo(assassino);
+            assassino.setAnterior(eliminada.getAnterior());
+            eliminada.setAnterior(null);
+            eliminada.setProximo(null);
+            setTamanho(getTamanho()-1);
+        }else{
+            assassino = null;
         }
-        eliminada = (Celula)endereco;    
-        for(i=0; i<intervalo; i++){
-            eliminada = eliminada.getProximo();
-        }
-        //assassino = eliminada.getProximo();
-        assassino = eliminada.getProximo();
-        (eliminada.getAnterior()).setProximo(assassino);
-        assassino.setAnterior(eliminada.getAnterior());
-        eliminada.setAnterior(null);
-        eliminada.setProximo(null);
         
         return assassino;
     }
