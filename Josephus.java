@@ -7,12 +7,12 @@
  */
 public class Josephus
 {
-    IListaDuplamenteLigada ldl;
+    IListaDuplamenteLigadaCircular ldl;
     private int intervalo;
     private Celula ponteiro;
     
     public Josephus(int intervalo){
-        ldl = new ListaDuplamenteLigada();
+        ldl = new ListaDuplamenteLigadaCircular();
         setIntervalo(intervalo);
         setPonteiro(null);
     }
