@@ -37,7 +37,7 @@ public class Josephus
         int i;
         Object novo;
         for(i=0; i<quantidade; i++){
-            novo = i+1;
+            novo = quantidade - i;
             ldl.inserirInicio(novo);
         }
         //setPonteiro(ldl.getInicio());
@@ -55,7 +55,7 @@ public class Josephus
     }
     
     public String exibirLista(){
-        return ldl.toStrinDoFim();
+        return ldl.toString();
     }
     
 }

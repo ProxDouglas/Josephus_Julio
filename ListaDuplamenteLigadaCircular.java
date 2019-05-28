@@ -283,9 +283,21 @@ class ListaDuplamenteLigadaCircular implements IListaDuplamenteLigadaCircular {
             }
             eliminada = (Celula)endereco;    
             for(i=0; i<intervalo; i++){
-                eliminada = eliminada.getProximo();
+                eliminada = eliminada.getAnterior();
             }
             //assassino = eliminada.getProximo();
+            
+            if(eliminada == getInicio()) { // se for inicio
+                setInicio(eliminada.getProximo());
+            } else {
+                eliminada.getAnterior().setProximo(eliminada.getProximo());
+            }
+
+            if(eliminada == getFim()) { // se for fim
+                setFim(eliminada.getAnterior());
+            } else {
+                eliminada.getProximo().setAnterior(eliminada.getAnterior());
+            }
             assassino = eliminada.getProximo();
             (eliminada.getAnterior()).setProximo(assassino);
             assassino.setAnterior(eliminada.getAnterior());
