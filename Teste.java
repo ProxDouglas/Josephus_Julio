@@ -10,13 +10,13 @@ public class Teste
     public static void main(String args[]){
         int inter = 2;
         Josephus test = new Josephus(inter);
-        test.inserir(10);
+        test.inserir(7);
         String s = test.exibirLista();
         System.out.println(s);
-        for(int i = 0; i<15;i+=inter){
-            test.eliminarPorEtapa(inter);
-            s = test.exibirLista();
-            System.out.println(s);
-        }
+        //for(int i = 0; i<17;i+=inter){
+            test.eliminarSemEtapas();
+            //s = test.exibirLista();
+            //System.out.println(s);
+        //}
     }
 }

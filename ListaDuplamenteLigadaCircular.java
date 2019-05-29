@@ -277,7 +277,7 @@ class ListaDuplamenteLigadaCircular implements IListaDuplamenteLigadaCircular {
         Celula eliminada;
         Celula assassino;
         int i;
-        if(getTamanho() > 1){
+        if(getTamanho() > 1){   
             if(endereco == null){
                 endereco = getInicio();
             }
@@ -310,6 +310,18 @@ class ListaDuplamenteLigadaCircular implements IListaDuplamenteLigadaCircular {
         }
         
         return assassino;
+    }
+    
+    /**
+     * Verifica se a Lista esta vazia
+     * 
+     * @return true se estiver vazia e false caso contrario
+     * 
+     */
+    public boolean temUmElemento() {
+        boolean unico = false;
+        if(getTamanho() == 1)unico = true;
+        return (unico); 
     }
 
     /**

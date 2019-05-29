@@ -23,6 +23,8 @@ public interface IListaDuplamenteLigadaCircular{
     
     public Object removerEmIntervalos(Object endereco, int intervalo);
     
+    public boolean temUmElemento();
+    
     public String toString();
     
     public String toStrinDoFim();

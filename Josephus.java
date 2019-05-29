@@ -38,7 +38,7 @@ public class Josephus
         Object novo;
         for(i=0; i<quantidade; i++){
             novo = quantidade - i;
-            ldl.inserirInicio(novo);
+            ldl.inserirFim(novo);
         }
         //setPonteiro(ldl.getInicio());
     }
@@ -48,10 +48,13 @@ public class Josephus
     }
     
     
-    public void eliminarSemEtapas(int intervalo){
+    public void eliminarSemEtapas(){
+        String s = exibirLista();
         do{
-            eliminarPorEtapa(intervalo);
-        }while(getPonteiro() != null);
+            eliminarPorEtapa(getIntervalo());
+            s = exibirLista();
+            System.out.println(s);
+        }while(!ldl.temUmElemento());
     }
     
     public String exibirLista(){
