@@ -5,16 +5,27 @@
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
+
 public class Josephus
 {
-    IListaDuplamenteLigadaCircular ldl;
+    private IListaDuplamenteLigadaCircular ldl;
     private int intervalo;
     private Celula ponteiro;
+    private long tempo; 
     
-    public Josephus(int intervalo){
+    public Josephus(int intervalo, double tempo){
         ldl = new ListaDuplamenteLigadaCircular();
         setIntervalo(intervalo);
         setPonteiro(null);
+        setTempo(tempo);
+    }
+    
+    public long getTempo(){
+        return this.tempo;
+    }
+    
+    public void setTempo(double tempo){
+        this.tempo = (long)(tempo * 1000);
     }
     
     public int getIntervalo(){
@@ -51,6 +62,12 @@ public class Josephus
     public void eliminarSemEtapas(){
         String s = exibirLista();
         do{
+            try {
+            // thread to sleep for 1000 milliseconds
+            Thread.sleep(getTempo());
+         } catch (Exception e) {
+            System.out.println(e);
+         }
             eliminarPorEtapa(getIntervalo());
             s = exibirLista();
             System.out.println(s);

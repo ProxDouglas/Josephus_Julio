@@ -9,7 +9,8 @@ public class Teste
 {
     public static void main(String args[]){
         int inter = 2;
-        Josephus test = new Josephus(inter);
+        double tempo = 0.8;
+        Josephus test = new Josephus(inter, tempo);
         test.inserir(7);
         String s = test.exibirLista();
         System.out.println(s);
