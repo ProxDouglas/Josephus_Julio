@@ -9,15 +9,11 @@ public class Teste
 {
     public static void main(String args[]){
         int inter = 2;
-        double tempo = 0.8;
+        double tempo = 0.1;
         Josephus test = new Josephus(inter, tempo);
-        test.inserir(7);
+        test.inserir(10);
         String s = test.exibirLista();
         System.out.println(s);
-        //for(int i = 0; i<17;i+=inter){
-            test.eliminarSemEtapas();
-            //s = test.exibirLista();
-            //System.out.println(s);
-        //}
+        test.eliminarSemEtapas();
     }
 }

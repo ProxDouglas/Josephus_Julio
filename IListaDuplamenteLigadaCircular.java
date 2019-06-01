@@ -9,6 +9,8 @@
 public interface IListaDuplamenteLigadaCircular{
     public boolean estaVazia();
     
+    public Object getInicio();
+    
     public void inserirInicio(Object elem);
 
     public void inserirFim(Object elem);
@@ -21,7 +23,7 @@ public interface IListaDuplamenteLigadaCircular{
     
     public Object removerPelaChave(int chave);
     
-    public Object removerEmIntervalos(Object endereco, int intervalo);
+    public Object removerPelaChaveEndereço(Object chave);
     
     public boolean temUmElemento();
     
