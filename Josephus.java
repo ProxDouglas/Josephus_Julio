@@ -12,13 +12,16 @@ public class Josephus
     private int intervalo;
     private Celula ponteiro;
     private long tempo;
-    
+    private Pilha sequencia;
+    private int quantidade;
 
-    public Josephus(int intervalo, double tempo){
+    public Josephus(){
         ldl = new ListaDuplamenteLigadaCircular();
         setIntervalo(intervalo);
-        setPonteiro(null);
+        setQtd(10);
         setTempo(tempo);
+        setPonteiro(null);
+        JosephusInterface inter = new JosephusInterface(getQtd(), getIntervalo(), (int)getTempo());
     }
 
     public long getTempo(){
@@ -44,6 +47,14 @@ public class Josephus
     public void setPonteiro(Celula ponteiro){
         this.ponteiro = ponteiro;
     }
+    
+    private void setQtd(int quantidade){
+     this.quantidade = quantidade;   
+    }
+    
+    public int getQtd(){
+        return this.quantidade;
+    }
 
     /**
      * Método inserir: inseri quantidade definida de elementos
@@ -59,7 +70,7 @@ public class Josephus
             ldl.inserirFim(novo);
         }
         setPonteiro((Celula)ldl.getInicio());
-        
+        sequencia = new Pilha(quantidade);
     }
 
     /**
@@ -79,7 +90,7 @@ public class Josephus
         setPonteiro(assassino.getProximo());
         morto = (Celula)ldl.removerPelaChaveEndereço(assassino);
 
-        
+        sequencia.inserir(morto.getConteudo());
     }
 
     /**
