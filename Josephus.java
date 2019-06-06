@@ -12,7 +12,7 @@ public class Josephus
     private int intervalo;
     private Celula ponteiro;
     private long tempo;
-    private Pilha sequencia;
+    //private Pilha sequencia;
     private int quantidade;
 
     public Josephus(){
@@ -70,7 +70,7 @@ public class Josephus
             ldl.inserirFim(novo);
         }
         setPonteiro((Celula)ldl.getInicio());
-        sequencia = new Pilha(quantidade);
+        //sequencia = new Pilha(quantidade);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Josephus
         setPonteiro(assassino.getProximo());
         morto = (Celula)ldl.removerPelaChaveEndereço(assassino);
 
-        sequencia.inserir(morto.getConteudo());
+        //sequencia.inserir(morto.getConteudo());
     }
 
     /**
