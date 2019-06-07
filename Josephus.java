@@ -14,15 +14,14 @@ public class Josephus
     private long tempo;
     private int quantidade;
 
-    public Josephus(){
+    public Josephus(int intervalo, double tempo){
         ldl = new ListaDuplamenteLigadaCircular();
         setIntervalo(intervalo);
-        setQtd(0);
-        setTempo(tempo);
         setPonteiro(null);
-        JosephusInterface inter = new JosephusInterface(getQtd(), getIntervalo(), (int)getTempo());
+        setTempo(tempo);
     }
-
+    
+    
     public long getTempo(){
         return this.tempo;
     }
@@ -97,32 +96,7 @@ public class Josephus
      *  e repeti o metodo eliminarPorEtapa até sobrar um elemento na lista
      *
      */
-    public void eliminarSemEtapas(){
-        String s = exibirLista();
-        int i = 0;
-        while(!ldl.estaVazia()){
-            try {
-                // thread to sleep for 1000 milliseconds
-                Thread.sleep(getTempo());
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            //if(!ldl.estaVazia()){
-                eliminarPorEtapa(getIntervalo());
-            //}
-            if(!ldl.estaVazia()){
-                s = exibirLista();
-                System.out.println(s);
-            //}
-        }
-    }
-    }
-
-    /**
-     * Método permutacaoJosephus: retorna a permutacao de josephus
-     *
-     */
-    public int[] permutacaoJosephus(){
+    public int[] eliminarSemEtapas(){
         //String s = exibirLista();
         int i = 0;
         int[] permutacao = new int[getQtd()];
@@ -134,15 +108,14 @@ public class Josephus
             //    System.out.println(e);
             //}
             //if(!ldl.estaVazia()){
-            permutacao[i] = eliminarPorEtapa(getIntervalo());
-            i++;
+                permutacao[i] = eliminarPorEtapa(getIntervalo());
+                i++;
             //}
             //if(!ldl.estaVazia()){
                 //s = exibirLista();
                 //System.out.println(s);
             //}
         }
-        
         return permutacao;
     }
 
