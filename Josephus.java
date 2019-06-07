@@ -12,13 +12,12 @@ public class Josephus
     private int intervalo;
     private Celula ponteiro;
     private long tempo;
-    //private Pilha sequencia;
     private int quantidade;
 
     public Josephus(){
         ldl = new ListaDuplamenteLigadaCircular();
         setIntervalo(intervalo);
-        setQtd(10);
+        setQtd(0);
         setTempo(tempo);
         setPonteiro(null);
         JosephusInterface inter = new JosephusInterface(getQtd(), getIntervalo(), (int)getTempo());
@@ -70,7 +69,7 @@ public class Josephus
             ldl.inserirFim(novo);
         }
         setPonteiro((Celula)ldl.getInicio());
-        //sequencia = new Pilha(quantidade);
+        setQtd(quantidade);
     }
 
     /**
