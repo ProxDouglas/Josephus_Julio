@@ -9,8 +9,11 @@ public class Teste
 {
     public static void main(String args[]){
         int inter = 2;
-        double tempo = 0.1;
-        Josephus test = new Josephus();
+        double tempo = 1;
+        int individuos = 10; 
+        JosephusInterface jogo = new JosephusInterface(individuos, inter, tempo); 
+        Josephus test = new Josephus(inter, tempo);
+        jogo.mostrarGui();
         //test.inserir(10);
         //String s = test.exibirLista();
         //System.out.println(s);
