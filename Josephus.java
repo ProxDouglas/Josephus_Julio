@@ -78,19 +78,19 @@ public class Josephus
      *
      * @param intervalo Um parâmetro que define o intervalo para eliminar
      */
-    public void eliminarPorEtapa(int intervalo){
+    public int eliminarPorEtapa(int intervalo){
         Celula assassino;
         Celula morto;
-        int i;
+        int i, mortoN;
 
         assassino = getPonteiro();
         for(i=1 ; i<intervalo; i++){
             assassino = assassino.getProximo();
         }
         setPonteiro(assassino.getProximo());
+        mortoN = (int)assassino.getConteudo();
         morto = (Celula)ldl.removerPelaChaveEndereço(assassino);
-
-        //sequencia.inserir(morto.getConteudo());
+        return mortoN;
     }
 
     /**
@@ -98,21 +98,27 @@ public class Josephus
      *  e repeti o metodo eliminarPorEtapa até sobrar um elemento na lista
      *
      */
-    public void eliminarSemEtapas(){
-        String s = exibirLista();
+    public int[] eliminarSemEtapas(){
+        //String s = exibirLista();
+        int i = 0;
+        int[] permutacao = new int[getQtd()];
         while(!ldl.estaVazia()){
-            try {
+            //try {
                 // thread to sleep for 1000 milliseconds
-                Thread.sleep(getTempo());
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            eliminarPorEtapa(getIntervalo());
-            if(!ldl.estaVazia()){
-                s = exibirLista();
-                System.out.println(s);
-            }
+            //    Thread.sleep(getTempo());
+            //} catch (Exception e) {
+            //    System.out.println(e);
+            //}
+            //if(!ldl.estaVazia()){
+                permutacao[i] = eliminarPorEtapa(getIntervalo());
+                i++;
+            //}
+            //if(!ldl.estaVazia()){
+                //s = exibirLista();
+                //System.out.println(s);
+            //}
         }
+        return permutacao;
     }
 
     /**
