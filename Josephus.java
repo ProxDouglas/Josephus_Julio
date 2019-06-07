@@ -97,7 +97,32 @@ public class Josephus
      *  e repeti o metodo eliminarPorEtapa até sobrar um elemento na lista
      *
      */
-    public int[] eliminarSemEtapas(){
+    public void eliminarSemEtapas(){
+        String s = exibirLista();
+        int i = 0;
+        while(!ldl.estaVazia()){
+            try {
+                // thread to sleep for 1000 milliseconds
+                Thread.sleep(getTempo());
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            //if(!ldl.estaVazia()){
+                eliminarPorEtapa(getIntervalo());
+            //}
+            if(!ldl.estaVazia()){
+                s = exibirLista();
+                System.out.println(s);
+            //}
+        }
+    }
+    }
+
+    /**
+     * Método permutacaoJosephus: retorna a permutacao de josephus
+     *
+     */
+    public int[] permutacaoJosephus(){
         //String s = exibirLista();
         int i = 0;
         int[] permutacao = new int[getQtd()];
@@ -109,14 +134,15 @@ public class Josephus
             //    System.out.println(e);
             //}
             //if(!ldl.estaVazia()){
-                permutacao[i] = eliminarPorEtapa(getIntervalo());
-                i++;
+            permutacao[i] = eliminarPorEtapa(getIntervalo());
+            i++;
             //}
             //if(!ldl.estaVazia()){
                 //s = exibirLista();
                 //System.out.println(s);
             //}
         }
+        
         return permutacao;
     }
 
