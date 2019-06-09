@@ -13,7 +13,7 @@ public class Teste
         int individuos = 10; 
         JosephusInterface jogo = new JosephusInterface(individuos, inter, tempo); 
         Josephus test = new Josephus(jogo.getIntervalo(), jogo.getTempoEspera());
-        test.inserir(jogo.getQtdIndividuos());
+        //test.inserir(jogo.getQtdIndividuos());
         jogo.mostrarGui();
         //test.inserir(10);
         //String s = test.exibirLista();

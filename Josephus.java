@@ -82,12 +82,14 @@ public class Josephus
         int i, mortoN;
 
         assassino = getPonteiro();
-        for(i=1 ; i<intervalo; i++){
+        
+        for(i=1; i<intervalo; i++){
             assassino = assassino.getProximo();
         }
         setPonteiro(assassino.getProximo());
         mortoN = (int)assassino.getConteudo();
         morto = (Celula)ldl.removerPelaChaveEndereço(assassino);
+        setQtd(getQtd()-1);
         return mortoN;
     }
 
@@ -109,7 +111,7 @@ public class Josephus
             //}
             //if(!ldl.estaVazia()){
                 permutacao[i] = eliminarPorEtapa(getIntervalo());
-                i++;            
+                i++;
                 //}
             //if(!ldl.estaVazia()){
                 //s = exibirLista();

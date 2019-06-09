@@ -491,8 +491,8 @@ public class JosephusInterface extends JFrame implements ActionListener{
             int k = 0;
             test.inserir(getQtdIndividuos());
             permut = test.eliminarSemEtapas();
-            while(getQtdIndividuos() != 0){
-                individuos[permut[k]].setBackground(getCorIndividuoExecutado());
+            while(getQtdIndividuos()-1 != 0){
+                individuos[permut[k]-1].setBackground(getCorIndividuoExecutado());
                 k++;
                 setQtdIndividuos(getQtdIndividuos()-1);
                 try {
