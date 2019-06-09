@@ -17,7 +17,7 @@ public class Josephus
     public Josephus(int intervalo, double tempo){
         ldl = new ListaDuplamenteLigadaCircular();
         setIntervalo(intervalo);
-        setPonteiro(null);
+        setPonteiro(ponteiro);
         setTempo(tempo);
     }
     
@@ -109,8 +109,8 @@ public class Josephus
             //}
             //if(!ldl.estaVazia()){
                 permutacao[i] = eliminarPorEtapa(getIntervalo());
-                i++;
-            //}
+                i++;            
+                //}
             //if(!ldl.estaVazia()){
                 //s = exibirLista();
                 //System.out.println(s);
