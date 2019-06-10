@@ -77,7 +77,8 @@ public class JosephusInterface extends JFrame implements ActionListener{
     double tempoEspera; // velocidade da animacao
     int ultimo;
     int primeiro;
-
+    int perm[];
+    boolean verif;
     public JosephusInterface (int qtdIndividuos, int intervalo, double tempoEspera) {
 
         // Caracteristicas da Janela
@@ -87,9 +88,9 @@ public class JosephusInterface extends JFrame implements ActionListener{
         this.setResizable(false);
 
         // Cores para os componentes
-        setCorIndividuo(Color.BLUE);
+        setCorIndividuo(Color.WHITE);
         setCorIndividuoExecutado(Color.RED);
-        setCorFundo(Color.LIGHT_GRAY);
+        setCorFundo(Color.BLACK);
         setCorBorda(Color.GRAY);
 
         // painel de individuos
@@ -101,7 +102,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
         individuos = new JLabel [qtdIndividuos]; 
 
         // Define layout dos botoes
-        painelComandos.setLayout (new GridLayout(4,1));
+        painelComandos.setLayout (new GridLayout(4,4));
 
         // Define qtde de individuos
         setQtdIndividuos(qtdIndividuos);
@@ -109,9 +110,9 @@ public class JosephusInterface extends JFrame implements ActionListener{
         setIntervalo(intervalo);
         // Velocidade de animacao
         setTempoEspera(tempoEspera);
-        
+
         setPrimeiroIndividuo(0);
-        
+
         setUltimoIndividuo(qtdIndividuos-1);
 
     }
@@ -136,6 +137,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
     protected Color getCorIndividuo() {
         return this.corIndividuo;
     }
+
 
     /**
      * @param corIndividuo 
@@ -165,24 +167,23 @@ public class JosephusInterface extends JFrame implements ActionListener{
     public void setQtdIndividuos(int qtdIndividuos) {
         this.qtdIndividuos = qtdIndividuos;
     }
-    
+
     public void setPrimeiroIndividuo(int primeiro){
         this.primeiro = primeiro;
     }
-    
+
     public void setUltimoIndividuo(int ultimo){
         this.ultimo = ultimo;
     }
-    
+
     public int getPrimeiroIndividuo(){
         return this.primeiro;
     }
-    
+
     public int getUltimoIndividuo(){
         return this.ultimo;
     }
-    
-    
+
 
     public int getIntervalo() {
         return this.intervalo;
@@ -207,6 +208,14 @@ public class JosephusInterface extends JFrame implements ActionListener{
         return corIndividuoExecutado;
     }
 
+    public void setPermut(int [] perm){
+        this.perm = perm;
+    }
+
+    public int[] getPermut(){
+        return this.perm;   
+    }
+
     /**
      * @param corIndividuoExecutado the corIndividuoExecutado to set
      */
@@ -224,7 +233,6 @@ public class JosephusInterface extends JFrame implements ActionListener{
         // Adiciona individuos (j=labels) no painel de individuos
         individuos = new JLabel [getQtdIndividuos()]; // cria array de jpanels
     }
-
 
     /**
      * reconfigurar
@@ -304,7 +312,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
         jtfTempoEspera = new JTextField(""+getTempoEspera());
         jtfTempoEspera.setColumns(4);
         jtfTempoEspera.setEnabled(false);
-        jtfTempoEspera.setToolTipText("Tempo de espera");
+        jtfTempoEspera.setToolTipText("Tempo de espera (Ex: 1s = 1000.0)");
 
         jbSobre = new JButton ("Sobre");
         jbSobre.setToolTipText("Sobre Josephus GUI");
@@ -320,7 +328,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
         painelEntrada.add (jbSobre);
 
         // Adiciona o painel de entrada no painel principal 
-        painelPrincipal.add ("South", painelEntrada);
+        painelPrincipal.add ("North", painelEntrada);
     }
 
     /**
@@ -335,7 +343,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
         adicionarLabelsNoPainelIndividuos(qtde);
 
         // Adiciona o painel de jlabels na posicao norte da janela principal 
-        painelPrincipal.add ("East", painelIndividuos);
+        painelPrincipal.add ("Center", painelIndividuos);
     }
 
     /**
@@ -409,7 +417,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
         painelComandos.add (jbSair);
 
         //adiciona o painel de botoes na posiï¿½ï¿½o sul da janela principal
-        painelPrincipal.add ("West", painelComandos);
+        painelPrincipal.add ("South", painelComandos);
     }
 
     public void actionPerformed(ActionEvent evt) {
@@ -419,6 +427,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
 
         // executa acao de acordo com o evento
         if (comando.equals("Sair")){ // botao Sair
+            //setVerif(true);
             System.exit(0);
         } else if (comando.equals("Executar")){ // botao Executar           
             // verifica parametros
@@ -434,7 +443,8 @@ public class JosephusInterface extends JFrame implements ActionListener{
             }
         } else if (comando.equals("Reiniciar")){ // botao reiniciar
             // pega parametros
-            //animar.stop();
+            animar.stop();
+            //setVerif(false);
             int qtdSold = Integer.parseInt(jtfNsoldados.getText()); 
             int interv = Integer.parseInt(jtfIntervalo.getText());
             double tempo = Double.parseDouble(jtfTempoEspera.getText());
@@ -443,7 +453,6 @@ public class JosephusInterface extends JFrame implements ActionListener{
 
                 // Reinicia / reconfigura com novos dados
                 reconfigurar(qtdSold, interv, tempo);
-
 
                 // habilita botao executar
                 jbExecutar.setEnabled(true);
@@ -475,11 +484,9 @@ public class JosephusInterface extends JFrame implements ActionListener{
         } 
     }
 
-    
     private class Animacao extends Thread {
         public double tempoEspera;
-        
-        
+
         public Animacao(double tempoEspera){
             this.tempoEspera = tempoEspera;
         }
@@ -501,26 +508,27 @@ public class JosephusInterface extends JFrame implements ActionListener{
 
                 }
             }
+
+            individuos[permut[k]-1].setBackground(Color.GREEN);
             /*
             // TESTE
             int k = 0;
             int qtd = getQtdIndividuos();
             while(getQtdIndividuos() != 0){
-                k += getIntervalo();
-                if(k == getUltimoIndividuo()){
-                    
-                }
-                individuos[k].setBackground(getCorIndividuoExecutado());
-                try {
-                    Thread.sleep((long)this.tempoEspera);
-                }catch(Exception e) {
+            k += getIntervalo();
+            if(k == getUltimoIndividuo()){
 
-                }
-            */
+            }
+            individuos[k].setBackground(getCorIndividuoExecutado());
+            try {
+            Thread.sleep((long)this.tempoEspera);
+            }catch(Exception e) {
+
+            }
+             */
         }
     }
-    
-    
+
     
     /**
      * iniciarAnimacao
@@ -536,7 +544,6 @@ public class JosephusInterface extends JFrame implements ActionListener{
         animar.start();
     }
 
-    
     /**
      * sobre
      * 
@@ -545,9 +552,9 @@ public class JosephusInterface extends JFrame implements ActionListener{
      */ 
     private void sobre(){
         String texto = "Josephus GUI 1.1\n\nEsta aplicacao implementa o algoritmo do Josephus \ncom Lista Duplamente Ligada Circular"
-                + "\n\n(c) Copyright 2019. Todos os direitos reservados.\n\n"
-                + "LED - Laboratorio de Estruturas Dinamicas\n"
-                + "Gabriel Ferreira Lima Silva - Douglas Cavalcanti - Raul Costa";
+            + "\n\n(c) Copyright 2019. Todos os direitos reservados.\n\n"
+            + "LED - Laboratorio de Estruturas Dinamicas\n"
+            + "Gabriel Ferreira Lima Silva - Douglas Cavalcanti - Raul Costa";
 
         JOptionPane.showMessageDialog(null, texto, "Sobre Josephus GUI", JOptionPane.INFORMATION_MESSAGE);
     }
