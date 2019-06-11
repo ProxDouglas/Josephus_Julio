@@ -79,6 +79,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
     int primeiro;
     int perm[];
     boolean verif;
+    boolean inicio;
     public JosephusInterface (int qtdIndividuos, int intervalo, double tempoEspera) {
 
         // Caracteristicas da Janela
@@ -114,6 +115,8 @@ public class JosephusInterface extends JFrame implements ActionListener{
         setPrimeiroIndividuo(0);
 
         setUltimoIndividuo(qtdIndividuos-1);
+        
+        setInicio(true);
 
     }
 
@@ -137,7 +140,6 @@ public class JosephusInterface extends JFrame implements ActionListener{
     protected Color getCorIndividuo() {
         return this.corIndividuo;
     }
-
 
     /**
      * @param corIndividuo 
@@ -184,6 +186,21 @@ public class JosephusInterface extends JFrame implements ActionListener{
         return this.ultimo;
     }
 
+    public boolean getVerif(){
+        return this.verif;
+    }
+
+    public void setVerif(boolean verif){
+        this.verif = verif;
+    }
+    
+    public boolean getInicio(){
+        return this.inicio;
+    }
+    
+    public void setInicio(boolean inicio){
+        this.inicio = inicio;
+    }
 
     public int getIntervalo() {
         return this.intervalo;
@@ -427,7 +444,7 @@ public class JosephusInterface extends JFrame implements ActionListener{
 
         // executa acao de acordo com o evento
         if (comando.equals("Sair")){ // botao Sair
-            //setVerif(true);
+            setVerif(true);
             System.exit(0);
         } else if (comando.equals("Executar")){ // botao Executar           
             // verifica parametros
@@ -438,13 +455,16 @@ public class JosephusInterface extends JFrame implements ActionListener{
                 jbConfig.setEnabled(true);
                 jbExecutar.setEnabled(false);
                 jbReiniciar.setEnabled(true);
+                setInicio(false);
             } else {
                 JOptionPane.showMessageDialog(null, "Valores Invalidos", "Erro!!", JOptionPane.ERROR_MESSAGE);
             }
         } else if (comando.equals("Reiniciar")){ // botao reiniciar
             // pega parametros
-            animar.stop();
-            //setVerif(false);
+            if(!getInicio()){
+                animar.stop();
+            }
+            setVerif(false);
             int qtdSold = Integer.parseInt(jtfNsoldados.getText()); 
             int interv = Integer.parseInt(jtfIntervalo.getText());
             double tempo = Double.parseDouble(jtfTempoEspera.getText());
@@ -493,11 +513,11 @@ public class JosephusInterface extends JFrame implements ActionListener{
 
         // Metodo contendo o algoritmo do Josephus
         public void run() {
-            Josephus test = new Josephus(getIntervalo(), getTempoEspera());
+            //Josephus test = new Josephus(getIntervalo(), getTempoEspera());
             int []permut;
             int k = 0;
-            test.inserir(getQtdIndividuos());
-            permut = test.eliminarSemEtapas();
+            //test.inserir(getQtdIndividuos());
+            permut = getPermut();
             while(getQtdIndividuos()-1 != 0){
                 individuos[permut[k]-1].setBackground(getCorIndividuoExecutado());
                 k++;
@@ -529,7 +549,6 @@ public class JosephusInterface extends JFrame implements ActionListener{
         }
     }
 
-    
     /**
      * iniciarAnimacao
      * 
